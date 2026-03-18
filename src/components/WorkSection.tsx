@@ -1,26 +1,32 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, ArrowRight, Briefcase } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const projects = [
   {
-    title: "Maison Noir — Brand Identity",
+    id: "social-media-designs",
+    title: "Social Media Designs",
     category: "Design",
-    year: "2025",
-    description: "Complete visual identity for a luxury lifestyle brand. Logo, typography system, and comprehensive brand guidelines.",
+    year: "",
+    description: "Visual Strategy for Fibo Media and other comprehensive social media designs.",
   },
   {
+    id: "vertex-saas",
     title: "Vertex SaaS — Content Engine",
     category: "Content Strategy",
     year: "2024",
     description: "Built a content machine: 40+ long-form articles, editorial calendar, and SEO strategy driving 3x organic growth.",
   },
   {
+    id: "live-bold-campaign",
     title: "#LiveBold — Social Campaign",
     category: "Digital Marketing",
     year: "2024",
     description: "Multi-platform campaign generating 2M+ impressions through user-generated content and influencer partnerships.",
   },
   {
+    id: "lumiere-ecommerce",
     title: "Lumière — E-commerce Pages",
     category: "Design · Copywriting",
     year: "2023",
@@ -44,34 +50,48 @@ const WorkSection = () => {
           <h2 className="text-3xl md:text-4xl font-medium tracking-tight">Selected work</h2>
         </motion.div>
 
-        <div className="divide-y divide-border">
-          {projects.map((project, i) => (
-            <motion.a
-              key={project.title}
-              href="#"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group block py-8 md:py-10 first:pt-0"
-            >
-              <div className="flex items-start justify-between gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-2">
-                    <span className="text-xs text-muted-foreground tracking-wider">{project.year}</span>
-                    <span className="text-xs text-primary/60 tracking-wider uppercase">{project.category}</span>
+        <div className="flex flex-col gap-6">
+          {projects.map((project, i) => {
+            const isSocialMedia = project.id === "social-media-designs";
+
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="relative"
+              >
+                <Link
+                  to={isSocialMedia ? "/clients" : `/project/${project.id}`}
+                  className="glass-card block p-8 group relative overflow-hidden"
+                >
+                  <div className="flex items-start justify-between gap-6 relative z-10">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-3">
+                        {project.year && <span className="text-[10px] text-muted-foreground tracking-[0.3em] font-medium">{project.year}</span>}
+                        <span className="text-[10px] text-primary/60 tracking-[0.3em] uppercase font-bold">{project.category}</span>
+                        {isSocialMedia && (
+                          <span className="text-[10px] text-primary tracking-[0.2em] font-medium ml-2">MULTIPLE CLIENTS</span>
+                        )}
+                      </div>
+                      <h3 className="text-2xl font-medium tracking-tight mb-3 transition-all duration-300 group-hover:translate-x-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm max-w-lg font-light leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+                      <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary-foreground transition-all" />
+                    </div>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-medium tracking-tight group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mt-2 max-w-lg font-light leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 shrink-0 mt-2" />
-              </div>
-            </motion.a>
-          ))}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

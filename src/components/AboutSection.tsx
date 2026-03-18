@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
-import { Palette, PenLine, TrendingUp, Megaphone } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Palette, PenLine, TrendingUp, Megaphone, ArrowRight } from "lucide-react";
 
 const skills = [
   { icon: Palette, title: "Visual Design", desc: "Brand systems, UI/UX, and visual identities that leave lasting impressions.", stat: "50+ brands" },
@@ -31,23 +33,38 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={skill.title}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card p-8 md:p-10 group hover:bg-muted/30 transition-colors"
-            >
-              <div className="flex items-start justify-between mb-6">
-                <skill.icon className="w-5 h-5 text-primary/70 group-hover:text-primary transition-colors" />
-                <span className="text-xs text-muted-foreground tracking-wider font-medium">{skill.stat}</span>
-              </div>
-              <h3 className="text-lg font-medium mb-2 tracking-tight">{skill.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed font-light">{skill.desc}</p>
-            </motion.div>
-          ))}
+          {skills.map((skill, i) => {
+            const isVisualDesign = i === 0;
+
+            return (
+              <motion.div
+                key={skill.title}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-card p-8 md:p-10 group hover:bg-muted/30 transition-colors relative"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <skill.icon className="w-5 h-5 text-primary/70 group-hover:text-primary transition-colors" />
+                  <span className="text-xs text-muted-foreground tracking-wider font-medium">{skill.stat}</span>
+                </div>
+                
+                <h3 className="text-lg font-medium mb-2 tracking-tight">{skill.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed font-light mb-6">{skill.desc}</p>
+
+                {isVisualDesign && (
+                  <Link 
+                    to="/clients"
+                    className="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn hover:text-primary transition-colors"
+                  >
+                    View Clients I've worked with
+                    <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  </Link>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
