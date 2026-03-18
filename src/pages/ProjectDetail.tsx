@@ -307,6 +307,8 @@ const ProjectDetail = () => {
                                     src={src} 
                                     alt={`Gallery image ${index + 1}`}
                                     className="h-full w-auto object-contain rounded shadow-lg"
+                                    loading={set === 1 ? "eager" : "lazy"}
+                                    decoding="async"
                                     onError={(e) => {
                                       e.currentTarget.style.display = 'none';
                                       e.currentTarget.parentElement!.classList.add('bg-secondary/20', 'w-[300px]', 'flex', 'items-center', 'justify-center');
@@ -359,6 +361,7 @@ const ProjectDetail = () => {
                           alt={`Individual exhibit ${i + 1}`}
                           className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-out shadow-md"
                           loading="lazy"
+                          decoding="async"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
                             e.currentTarget.parentElement!.classList.add('flex', 'items-center', 'justify-center', 'p-12');
