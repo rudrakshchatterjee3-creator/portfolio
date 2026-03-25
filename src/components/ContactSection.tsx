@@ -33,7 +33,6 @@ const ContactSection = () => {
           <div className="flex gap-8 mt-14">
             {[
               { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rudraksh-chatterjee-2a7651177?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-              { icon: Mail, label: "Email", href: "mailto:rudraksh.chatterjee3@gmail.com" },
             ].map((item) => (
               <a
                 key={item.label}

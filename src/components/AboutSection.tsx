@@ -34,8 +34,6 @@ const AboutSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border rounded-lg overflow-hidden">
           {skills.map((skill, i) => {
-            const isVisualDesign = i === 0;
-
             return (
               <motion.div
                 key={skill.title}
@@ -52,16 +50,6 @@ const AboutSection = () => {
                 
                 <h3 className="text-lg font-medium mb-2 tracking-tight">{skill.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed font-light mb-6">{skill.desc}</p>
-
-                {isVisualDesign && (
-                  <Link 
-                    to="/clients"
-                    className="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn hover:text-primary transition-colors"
-                  >
-                    View Clients I've worked with
-                    <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  </Link>
-                )}
               </motion.div>
             );
           })}

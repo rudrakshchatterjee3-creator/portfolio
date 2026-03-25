@@ -1,9 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
-
 @layer base {
   :root {
     --background: 30 20% 98%;
@@ -80,41 +78,6 @@
     min-height: 100vh;
   }
 
-  /* 
-    The Antigravity interactive background glow.
-    Uses a pseudo-element on the body to guarantee it's always at the very bottom of the stacking context,
-    and relies purely on CSS variables updated by JS for butter-smooth, lag-free rendering.
-  */
-  body.antigravity-bg::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    mix-blend-mode: screen;
-    /* Soft, large radial gradient that follows the CSS variables */
-    background: radial-gradient(
-      800px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
-      rgba(220, 150, 80, 0.12),
-      rgba(220, 150, 80, 0) 80%
-    );
-    background: radial-gradient(
-      800px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
-      rgba(220, 150, 80, 0.12),
-      rgba(220, 150, 80, 0) 80%
-    );
-  }
-
-  body.dark.antigravity-bg::before {
-    background: radial-gradient(
-      800px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
-      rgba(230, 160, 90, 0.06),
-      rgba(230, 160, 90, 0) 80%
-    );
-  }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;

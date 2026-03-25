@@ -30,7 +30,7 @@ const HeroSection = () => {
           >
             Crafting digital
             <br />
-            <span className="text-gradient italic">narratives</span> that
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 italic px-1">narratives</span> that
             <br />
             elevate brands.
           </motion.h1>
@@ -39,15 +39,14 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="relative text-secondary-foreground text-base md:text-lg max-w-md leading-relaxed mb-12 font-light pl-6"
+            className="relative glass-card p-6 md:p-8 mt-4 mb-12 max-w-lg border-l-2 border-l-primary/50 shadow-lg"
           >
-            <Quote className="absolute -top-4 -left-1 w-8 h-8 text-primary/10 -z-10" />
-            <div className="absolute left-0 top-2 bottom-2 w-px bg-primary/20" />
-            <span className="italic block">
-              Having a great brand means nothing if you're whispering in a crowded room. 
+            <Quote className="absolute top-4 right-4 w-6 h-6 text-primary/10 -z-10" />
+            <p className="text-secondary-foreground text-sm md:text-base leading-relaxed italic font-light">
+              "Having a great brand means nothing if you're whispering in a crowded room. 
               I build the megaphones. I blend scroll-stopping social media with 
-              ruthless marketing strategy to turn casual attention into measurable revenue.
-            </span>
+              ruthless marketing strategy to turn casual attention into measurable revenue."
+            </p>
           </motion.div>
 
           <motion.div

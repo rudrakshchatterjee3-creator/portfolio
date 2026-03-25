@@ -8,29 +8,19 @@ const projects = [
     id: "social-media-designs",
     title: "Social Media Designs",
     category: "Design",
-    year: "",
     description: "Visual Strategy for Fibo Media and other comprehensive social media designs.",
   },
   {
-    id: "vertex-saas",
-    title: "Vertex SaaS — Content Engine",
-    category: "Content Strategy",
-    year: "2024",
-    description: "Built a content machine: 40+ long-form articles, editorial calendar, and SEO strategy driving 3x organic growth.",
+    id: "email-marketing",
+    title: "Email Marketing",
+    category: "Email Marketing",
+    description: "I directed the entire email marketing operation, overcoming critical deliverability issues to drive rapid client acquisition on a tight budget.",
   },
   {
-    id: "live-bold-campaign",
-    title: "#LiveBold — Social Campaign",
-    category: "Digital Marketing",
-    year: "2024",
-    description: "Multi-platform campaign generating 2M+ impressions through user-generated content and influencer partnerships.",
-  },
-  {
-    id: "lumiere-ecommerce",
-    title: "Lumière — E-commerce Pages",
-    category: "Design · Copywriting",
-    year: "2023",
-    description: "High-converting product pages with A/B tested copy and visual design, boosting conversion by 40%.",
+    id: "social-media-management",
+    title: "Social Media & Community Management",
+    category: "Social Media & Community Management",
+    description: "End-to-end strategic growth, community engagement, and digital presence optimization.",
   },
 ];
 
@@ -53,6 +43,8 @@ const WorkSection = () => {
         <div className="flex flex-col gap-6">
           {projects.map((project, i) => {
             const isSocialMedia = project.id === "social-media-designs";
+            const isEmailMarketing = project.id === "email-marketing";
+            const isSmm = project.id === "social-media-management";
 
             return (
               <motion.div
@@ -64,15 +56,14 @@ const WorkSection = () => {
                 className="relative"
               >
                 <Link
-                  to={isSocialMedia ? "/clients" : `/project/${project.id}`}
+                  to={`/category/${project.id}`}
                   className="glass-card block p-8 group relative overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-6 relative z-10">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-3">
-                        {project.year && <span className="text-[10px] text-muted-foreground tracking-[0.3em] font-medium">{project.year}</span>}
                         <span className="text-[10px] text-primary/60 tracking-[0.3em] uppercase font-bold">{project.category}</span>
-                        {isSocialMedia && (
+                        {(isSocialMedia || isEmailMarketing || isSmm) && (
                           <span className="text-[10px] text-primary tracking-[0.2em] font-medium ml-2">MULTIPLE CLIENTS</span>
                         )}
                       </div>

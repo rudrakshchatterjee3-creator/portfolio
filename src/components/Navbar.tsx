@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Menu, X, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ModeToggle } from "./ModeToggle";
 
 const links = [
-  { label: "Expertise", href: "#about" },
-  { label: "Portfolio", href: "#work" },
-  { label: "Connect", href: "#contact" },
+  { label: "Expertise", href: "/#about" },
+  { label: "Portfolio", href: "/#work" },
+  { label: "Connect", href: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -14,9 +15,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 mt-6 mx-4 md:mx-16 lg:mx-24 liquid-glass rounded-3xl">
       <div className="flex items-center justify-between px-8 md:px-16 h-20">
-        <a href="#" className="text-base font-semibold tracking-[0.2em] uppercase text-foreground group">
+        <Link to="/" className="text-base font-semibold tracking-[0.2em] uppercase text-foreground group">
           Rudraksh <span className="text-primary group-hover:glow-text-sm transition-all duration-500">Chatterjee</span>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-12">
