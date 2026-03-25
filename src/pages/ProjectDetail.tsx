@@ -63,40 +63,6 @@ const projectDetails: Record<string, any> = {
       "/projects/email-marketing/Trollybud Emailer.png"
     ]
   },
-  "live-bold-campaign": {
-    title: "#LiveBold — Social Campaign",
-    category: "Digital Marketing",
-    client: "Bold Brands Inc.",
-    challenge: "Needed a viral campaign to launch their new product line to Gen Z.",
-    solution: "A multi-platform hashtag campaign heavily leaning into creator partnerships.",
-    results: ["2M+ impressions", "Trending on TikTok", "Sold out initial run"],
-    galleries: [
-      {
-        title: "Campaign Creatives",
-        description: "Key visuals from the multi-platform launch.",
-        images: ["/placeholder.svg", "/placeholder.svg"],
-        placeholderCount: 2,
-        folderPath: "livebold",
-      }
-    ]
-  },
-  "lumiere-ecommerce": {
-    title: "Lumière — E-commerce Pages",
-    category: "Design · Copywriting",
-    client: "Lumière",
-    challenge: "High cart abandonment and low time-on-page for high-ticket items.",
-    solution: "Redesigned product pages to focus on lifestyle imagery and compelling, benefit-driven copy.",
-    results: ["40% boost in conversions", "Reduced bounce rate"],
-    galleries: [
-      {
-        title: "Product Layouts",
-        description: "High-converting e-commerce wireframes and high-fidelity mockups.",
-        images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
-        placeholderCount: 4,
-        folderPath: "lumiere",
-      }
-    ]
-  },
   "matrix-media-solutions": {
     title: "Matrix Media Solutions",
     category: "Design",
@@ -110,22 +76,22 @@ const projectDetails: Record<string, any> = {
     ],
     galleries: [
       {
-        title: "Strategic Asset Row 01",
-        description: "High-frequency social collateral.",
+        title: "",
+        description: "",
         images: Array.from({ length: 5 }).map((_, i) => `/projects/matrix/3563285950367649825_3204368044_${i + 1}.png`),
         placeholderCount: 5,
         folderPath: "matrix",
       },
       {
-        title: "Strategic Asset Row 02",
-        description: "Omnichannel visual systems.",
+        title: "",
+        description: "",
         images: Array.from({ length: 8 }).map((_, i) => `/projects/matrix/3598302473175198266_3204368044_${i + 1}.png`),
         placeholderCount: 8,
         folderPath: "matrix",
       },
       {
-        title: "Strategic Asset Row 03",
-        description: "Global campaign visuals.",
+        title: "",
+        description: "",
         images: Array.from({ length: 7 }).map((_, i) => `/projects/matrix/3603852117473139168_3204368044_${i + 1}.png`),
         placeholderCount: 7,
         folderPath: "matrix",
@@ -149,8 +115,8 @@ const projectDetails: Record<string, any> = {
         folderPath: "matrix",
       },
       {
-        title: "Strategic Asset Row 04",
-        description: "Targeted digital engagement.",
+        title: "",
+        description: "",
         images: Array.from({ length: 4 }).map((_, i) => `/projects/matrix/3596849188379686483_3204368044_${i + 1}.png`),
         placeholderCount: 4,
         folderPath: "matrix",
@@ -483,6 +449,9 @@ const ProjectDetail = () => {
                         className="w-full h-auto object-contain opacity-0 data-[loaded=true]:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.03] shadow-md"
                         loading="lazy"
                         onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                        ref={(img) => {
+                          if (img && img.complete) img.setAttribute('data-loaded', 'true');
+                        }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
@@ -519,6 +488,9 @@ const ProjectDetail = () => {
                         className="w-full h-full object-cover object-[center_75%] opacity-0 data-[loaded=true]:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.03] shadow-md"
                         loading="lazy"
                         onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                        ref={(img) => {
+                          if (img && img.complete) img.setAttribute('data-loaded', 'true');
+                        }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
@@ -583,6 +555,9 @@ const ProjectDetail = () => {
                                     loading={set === 1 ? "eager" : "lazy"}
                                     decoding="async"
                                     onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                                    ref={(img) => {
+                                      if (img && img.complete) img.setAttribute('data-loaded', 'true');
+                                    }}
                                     onError={(e) => {
                                       e.currentTarget.style.display = 'none';
                                       e.currentTarget.parentElement!.classList.add('bg-secondary/20', 'w-[300px]', 'flex', 'items-center', 'justify-center');
@@ -638,6 +613,9 @@ const ProjectDetail = () => {
                           loading="lazy"
                           decoding="async"
                           onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                          ref={(img) => {
+                            if (img && img.complete) img.setAttribute('data-loaded', 'true');
+                          }}
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
                             e.currentTarget.parentElement!.classList.add('flex', 'items-center', 'justify-center', 'p-12');
