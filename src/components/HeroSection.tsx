@@ -26,12 +26,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] mb-8 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.2] md:leading-[1.1] mb-8 tracking-tight"
           >
             Crafting digital
-            <br />
+            <br className="hidden sm:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 italic px-1">narratives</span> that
-            <br />
+            <br className="hidden sm:block" />
             elevate brands.
           </motion.h1>
 
@@ -39,10 +39,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="relative glass-card p-6 md:p-8 mt-4 mb-12 max-w-lg border-l-2 border-l-primary/50 shadow-lg"
+            className="relative glass-card p-5 md:p-8 mt-4 mb-12 max-w-lg border-l-2 border-l-primary/50 shadow-lg"
           >
             <Quote className="absolute top-4 right-4 w-6 h-6 text-primary/10 -z-10" />
-            <p className="text-secondary-foreground text-sm md:text-base leading-relaxed italic font-light">
+            <p className="text-secondary-foreground text-[13px] sm:text-sm md:text-base leading-relaxed italic font-light">
               "Having a great brand means nothing if you're whispering in a crowded room. 
               I build the megaphones. I blend scroll-stopping social media with 
               ruthless marketing strategy to turn casual attention into measurable revenue."

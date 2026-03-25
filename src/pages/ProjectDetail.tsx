@@ -307,7 +307,7 @@ const ProjectDetail = () => {
               )}
 
               {/* Massive Number Watermark */}
-              <div className="absolute top-0 right-0 -z-10 pointer-events-none select-none opacity-[0.02] text-[15rem] md:text-[25rem] font-bold leading-none tracking-tighter">
+              <div className="absolute top-0 right-0 -z-10 pointer-events-none select-none opacity-[0.02] text-[10rem] sm:text-[15rem] md:text-[25rem] font-bold leading-none tracking-tighter">
                 {(projectIndex + 1).toString().padStart(2, '0')}
               </div>
 
@@ -329,43 +329,43 @@ const ProjectDetail = () => {
                     </p>
                   </div>
                   
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight mb-8">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight mb-8">
                     {project.title}
                   </h1>
                   
-                  <div className="inline-flex flex-wrap items-center gap-2 md:gap-4 px-5 py-3 rounded-full border border-primary/20 bg-secondary/10 self-start backdrop-blur-sm">
-                    <span className="text-xs tracking-widest uppercase font-bold text-primary/70">Client Profile</span>
+                  <div className="inline-flex flex-wrap items-center gap-2 md:gap-4 px-4 py-2 sm:px-5 sm:py-3 rounded-full border border-primary/20 bg-secondary/10 self-start backdrop-blur-sm">
+                    <span className="text-[10px] sm:text-xs tracking-widest uppercase font-bold text-primary/70">Client Profile</span>
                     <div className="w-1 h-1 rounded-full bg-primary/40 hidden md:block" />
-                    <p className="text-sm md:text-base text-card-foreground font-medium">
+                    <p className="text-xs sm:text-sm md:text-base text-card-foreground font-medium">
                       {project.client}
                     </p>
                   </div>
                 </div>
             {/* Consolidated Content Details */}
-            <div className="grid md:grid-cols-3 gap-12 md:gap-8 pt-8 border-t border-border/40">
-              <div className="md:col-span-2 space-y-12">
+            <div className="grid md:grid-cols-3 gap-10 md:gap-8 pt-8 border-t border-border/40">
+              <div className="md:col-span-2 space-y-10 md:space-y-12">
                 <div>
-                  <h3 className="text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
+                  <h3 className="text-lg sm:text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
                     <div className="w-8 h-px bg-primary/40" />
                     The Challenge
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed font-light text-lg">
+                  <p className="text-muted-foreground leading-relaxed font-light text-base sm:text-lg">
                     {project.challenge}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
+                  <h3 className="text-lg sm:text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
                     <div className="w-8 h-px bg-primary/40" />
                     The Solution
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed font-light text-lg">
+                  <p className="text-muted-foreground leading-relaxed font-light text-base sm:text-lg">
                     {project.solution}
                   </p>
                 </div>
               </div>
 
-              <div className="glass-card p-8 self-start">
+              <div className="glass-card p-6 sm:p-8 self-start">
                 <h3 className="text-sm font-bold mb-6 uppercase tracking-[0.2em] text-primary">Impact & Results</h3>
                 <ul className="space-y-4">
                   {project.results.map((result: string, i: number) => (
@@ -386,9 +386,9 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             className="text-center mb-24 max-w-3xl mx-auto px-4"
           >
-            <div className="w-24 h-px bg-primary/20 mx-auto mb-12" />
-            <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-6 italic">{project.quoteHeader || "High-Impact Carousels That Demand a Verdict"}</h2>
-            <p className="text-xl text-muted-foreground font-light leading-relaxed italic">
+            <div className="w-24 h-px bg-primary/20 mx-auto mb-10 sm:mb-12" />
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight mb-6 italic">{project.quoteHeader || "High-Impact Carousels That Demand a Verdict"}</h2>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed italic">
               {project.quoteText || "\"You don't just need a design. You need a statement. A billboard for your brilliance. I deliver work that works as hard as you do, maybe even harder. Precision meets persuasion in every slide.\""}
             </p>
           </motion.div>
@@ -422,13 +422,13 @@ const ProjectDetail = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16 px-4"
+                className="text-center mb-12 sm:mb-16 px-4"
               >
-                <h3 className="text-3xl font-medium tracking-tight mb-4 text-foreground/90">Campaign Creatives</h3>
-                <p className="text-muted-foreground font-light text-lg">
+                <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-4 text-foreground/90">Campaign Creatives</h3>
+                <p className="text-muted-foreground font-light text-base sm:text-lg">
                   Designed in collaboration with expert email designers. Click to enlarge.
                 </p>
-                <div className="w-24 h-px bg-primary/20 mx-auto mt-8" />
+                <div className="w-24 h-px bg-primary/20 mx-auto mt-6 sm:mt-8" />
               </motion.div>
               
               <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -522,14 +522,14 @@ const ProjectDetail = () => {
                   className="w-full"
                 >
                   {gallery.title && (
-                    <div className="mb-8 px-4 md:px-12 text-center md:text-left">
-                      <h3 className="text-2xl font-medium tracking-tight text-foreground/90">{gallery.title}</h3>
-                      {gallery.description && <p className="text-base text-muted-foreground mt-2 font-light">{gallery.description}</p>}
+                    <div className="mb-6 sm:mb-8 px-4 md:px-12 text-center md:text-left">
+                      <h3 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground/90">{gallery.title}</h3>
+                      {gallery.description && <p className="text-sm sm:text-base text-muted-foreground mt-2 font-light">{gallery.description}</p>}
                     </div>
                   )}
                   <div className="relative group">
                     {/* Centered Marquee Container */}
-                    <div className="relative mesh-glow p-8 md:p-12 rounded-[3rem] overflow-hidden">
+                    <div className="relative mesh-glow p-4 sm:p-8 md:p-12 rounded-[1.5rem] sm:rounded-[3rem] overflow-hidden">
                       <div className="marquee-container group cursor-crosshair">
                         {[1, 2, 3, 4].map((set) => {
                           // Calculate duration based on image count to keep speed (pixels/sec) constant
@@ -587,9 +587,9 @@ const ProjectDetail = () => {
                 viewport={{ once: true }}
                 className="text-center mb-24"
               >
-                <div className="w-24 h-px bg-primary/20 mx-auto mb-12" />
-                <h2 className="text-4xl font-medium tracking-tight mb-6 italic">The Individual Exhibits</h2>
-                <p className="text-xl text-muted-foreground font-light italic">
+                <div className="w-24 h-px bg-primary/20 mx-auto mb-10 sm:mb-12" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight mb-6 italic">The Individual Exhibits</h2>
+                <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-light italic px-4">
                   "Stand-alone brilliance. Each frame curated to command the full attention of the jury."
                 </p>
               </motion.div>
