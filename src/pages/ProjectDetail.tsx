@@ -53,8 +53,8 @@ const projectDetails: Record<string, any> = {
     },
     galleryMode: "popup-grid",
     images: [
-      "/projects/email-marketing/PSM Emailer.png",
-      "/projects/email-marketing/PSM Emailer 2.png",
+      "/projects/email-marketing/PSM_Emailer.png",
+      "/projects/email-marketing/PSM_Emailer_2.png",
       "/projects/email-marketing/Emailer-PSM.png",
       "/projects/email-marketing/CTS Emailer-04.png",
       "/projects/email-marketing/CTS Emailer-03.png",
@@ -442,18 +442,36 @@ const ProjectDetail = () => {
                     className="break-inside-avoid relative group cursor-pointer fast-card p-2 hover:border-primary/50 transition-colors duration-500"
                     onClick={() => setSelectedImage(src)}
                   >
-                    <div className="relative z-10 w-full overflow-hidden rounded-[10px] bg-secondary/5 flex items-center justify-center">
+                    <div className="relative z-10 w-full overflow-hidden rounded-[10px] bg-secondary/10 flex items-center justify-center min-h-[200px]">
+                      {/* Loading Indicator */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-secondary/20 animate-pulse data-[loaded=true]:hidden" id={`loader-${i}`}>
+                        <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+                      </div>
+                      
                       <img
                         src={src}
                         alt={`Campaign creative ${i + 1}`}
                         className="w-full h-auto object-contain opacity-0 data-[loaded=true]:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.03] shadow-md"
                         loading="lazy"
-                        onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                        onLoad={(e) => {
+                          e.currentTarget.setAttribute('data-loaded', 'true');
+                          const loader = document.getElementById(`loader-${i}`);
+                          if (loader) loader.setAttribute('data-loaded', 'true');
+                        }}
                         ref={(img) => {
-                          if (img && img.complete) img.setAttribute('data-loaded', 'true');
+                          if (img && img.complete) {
+                            img.setAttribute('data-loaded', 'true');
+                            const loader = document.getElementById(`loader-${i}`);
+                            if (loader) loader.setAttribute('data-loaded', 'true');
+                          }
                         }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
+                          const loader = document.getElementById(`loader-${i}`);
+                          if (loader) {
+                            loader.innerHTML = '<p class="text-[10px] uppercase tracking-widest text-muted-foreground">Asset Error</p>';
+                            loader.classList.remove('animate-pulse');
+                          }
                         }}
                       />
                     </div>
