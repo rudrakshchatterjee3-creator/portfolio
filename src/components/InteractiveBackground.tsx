@@ -15,11 +15,14 @@ const InteractiveBackground = () => {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 55; // Reduced from 70 for performance
-    const connectionDistance = 200;
-    const connectionDistSq = connectionDistance * connectionDistance; // Avoid sqrt
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 30 : 55;
+    const connectionDistance = isMobile ? 160 : 200;
+    const connectionDistSq = connectionDistance * connectionDistance;
     
     const isDark = currentTheme === "dark";
+    // Mobile gets ~50% reduced opacity
+    const opacityScale = isMobile ? 0.5 : 1.0;
     
     const dotR = isDark ? 184 : 120;
     const dotG = isDark ? 115 : 110;
@@ -28,22 +31,6 @@ const InteractiveBackground = () => {
     const lineG = isDark ? 130 : 105;
     const lineB = isDark ? 60 : 90;
 
-    // Scroll state — immediate response, no heavy smoothing
-    let scrollDelta = 0;
-
-    const onScroll = () => {
-      scrollDelta = 1; // Just flag that a scroll happened
-    };
-
-    let lastScrollY = window.scrollY;
-    const onScrollCapture = () => {
-      const now = window.scrollY;
-      const delta = now - lastScrollY;
-      lastScrollY = now;
-      scrollDelta = delta * 0.15; // Immediate, scaled-down response
-    };
-
-    window.addEventListener("scroll", onScrollCapture, { passive: true });
 
     class Particle {
       x: number;
@@ -53,37 +40,48 @@ const InteractiveBackground = () => {
       size: number;
       opacity: number;
       isStar: boolean;
-      scrollFactor: number;
+      // Antigravity float parameters
+      floatPhase: number;      // Unique sine-wave phase offset
+      floatAmplitudeX: number; // Horizontal oscillation amplitude
+      floatAmplitudeY: number; // Vertical oscillation amplitude
+      floatSpeed: number;      // How fast this particle oscillates
 
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.18;
-        this.vy = (Math.random() - 0.5) * 0.18;
+        // Very gentle base drift
+        this.vx = (Math.random() - 0.5) * 0.08;
+        this.vy = (Math.random() - 0.5) * 0.08;
         
         this.isStar = Math.random() < 0.15;
         this.size = this.isStar 
           ? Math.random() * 2.5 + 2
           : Math.random() * 1.2 + 0.5;
         
-        this.opacity = this.isStar
+        this.opacity = (this.isStar
           ? (isDark ? 0.45 : 0.18)
-          : (isDark ? 0.20 : 0.10);
+          : (isDark ? 0.20 : 0.10)) * opacityScale;
         
-        // Parallax depth factor
-        this.scrollFactor = this.isStar 
-          ? (Math.random() * 0.2 + 0.05)
-          : (Math.random() * 0.5 + 0.15);
+        // Each particle floats on its own unique sine curve
+        this.floatPhase = Math.random() * Math.PI * 2;
+        this.floatAmplitudeX = Math.random() * 0.25 + 0.05; // Subtle horizontal sway
+        this.floatAmplitudeY = Math.random() * 0.20 + 0.03; // Subtle vertical bob
+        this.floatSpeed = Math.random() * 0.008 + 0.003;    // Very slow oscillation
       }
 
-      update(sDelta: number) {
-        this.x += this.vx;
-        this.y += this.vy + (sDelta * this.scrollFactor);
+      update(time: number) {
+        // Antigravity: gentle upward drift (-0.02) + sine oscillation
+        const floatX = Math.sin(time * this.floatSpeed + this.floatPhase) * this.floatAmplitudeX;
+        const floatY = Math.cos(time * this.floatSpeed * 0.7 + this.floatPhase) * this.floatAmplitudeY;
+        
+        this.x += this.vx + floatX;
+        this.y += this.vy + floatY - 0.015; // Slight upward drift (antigravity)
 
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < -10) this.y = canvas.height + 10;
-        else if (this.y > canvas.height + 10) this.y = -10;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        // Wrap around edges seamlessly
+        if (this.x < -20) this.x = canvas.width + 20;
+        else if (this.x > canvas.width + 20) this.x = -20;
+        if (this.y < -20) this.y = canvas.height + 20;
+        else if (this.y > canvas.height + 20) this.y = -20;
       }
 
       draw() {
@@ -118,17 +116,14 @@ const InteractiveBackground = () => {
 
     const lineMaxOpacity = isDark ? 0.18 : 0.08;
     const lineW = isDark ? 0.6 : 0.4;
+    let frameCount = 0;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Immediately apply scroll delta then decay it fast
-      const currentScrollDelta = scrollDelta;
-      scrollDelta *= 0.75; // Fast decay — no lingering lag
-      if (Math.abs(scrollDelta) < 0.01) scrollDelta = 0;
+      frameCount++;
       
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update(currentScrollDelta);
+        particles[i].update(frameCount);
         particles[i].draw();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -138,7 +133,7 @@ const InteractiveBackground = () => {
 
           if (distSq < connectionDistSq) {
             const distance = Math.sqrt(distSq);
-            const lineOpacity = (1 - distance / connectionDistance) * lineMaxOpacity;
+            const lineOpacity = (1 - distance / connectionDistance) * lineMaxOpacity * opacityScale;
             
             ctx.beginPath();
             ctx.strokeStyle = `rgba(${lineR},${lineG},${lineB},${lineOpacity.toFixed(3)})`;
@@ -167,7 +162,6 @@ const InteractiveBackground = () => {
 
     return () => {
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", onScrollCapture);
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
     };
