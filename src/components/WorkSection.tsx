@@ -8,19 +8,19 @@ const projects = [
     id: "social-media-designs",
     title: "Social Media Designs",
     category: "Design",
-    description: "Visual Strategy for Fibo Media and other comprehensive social media designs.",
+    description: "A curated collection of cross-platform visual strategies. Explore how I translate distinct brand identities into engaging, high-performing design systems across various industries.",
   },
   {
     id: "email-marketing",
     title: "Email Marketing",
     category: "Email Marketing",
-    description: "I directed the entire email marketing operation, overcoming critical deliverability issues to drive rapid client acquisition on a tight budget.",
+    description: "Strategic campaigns designed for scale and conversion. This selection highlights my expertise in resolving complex deliverability challenges to drive rapid, cost-effective acquisition for diverse portfolios.",
   },
   {
     id: "social-media-management",
     title: "Social Media & Community Management",
     category: "Social Media & Community Management",
-    description: "End-to-end strategic growth, community engagement, and digital presence optimization.",
+    description: "End-to-end community building and digital optimization. Discover how I foster organic engagement, manage brand reputation, and architect sustainable growth across multiple online communities.",
   },
 ];
 
