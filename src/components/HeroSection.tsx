@@ -30,7 +30,7 @@ const HeroSection = () => {
           >
             Crafting digital
             <br className="hidden sm:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 italic px-1">narratives</span> that
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 italic px-1">narratives</span> that{" "}
             <br className="hidden sm:block" />
             elevate brands.
           </motion.h1>
@@ -86,7 +86,7 @@ const HeroSection = () => {
             {/* Image container */}
             <div className="absolute inset-6 rounded-full overflow-hidden border-2 border-primary/30 glow-shadow bg-secondary/20 transition-transform duration-700 hover:scale-[1.02]">
               <img 
-                src="/profile.jpg" 
+                src="/profile_new.png" 
                 alt="Rudraksh Chatterjee" 
                 className="w-full h-full object-cover object-center relative z-10"
                 onError={(e) => {

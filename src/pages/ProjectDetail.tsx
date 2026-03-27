@@ -34,7 +34,9 @@ const projectDetails: Record<string, any> = {
         placeholderCount: 5,
         folderPath: "fibo",
       }
-    ]
+    ],
+    quoteHeader: "Visuals That Stop the Scroll",
+    quoteText: "\"Good design isn't a luxury; it's the first handshake you have with a client. I made sure every slide I designed for Fibo felt like a premium experience - crisp, intentional, and impossible to ignore.\""
   },
   "psm-cabinets": {
     title: "PSM Cabinets",
@@ -51,6 +53,8 @@ const projectDetails: Record<string, any> = {
       title: "Leading The Strategic Advantage",
       content: "I achieved these results by prioritizing precision over sheer volume - ensuring that every single email I sent landed perfectly in the primary inbox. Under my direction, the email designers produced aesthetic templates that heavily resonated with cold prospects and warm leads alike. Establishing a rock-solid technical foundation, fixing deliverability, and configuring the SMTP servers were the critical steps I took to turn creative concepts into rapid, measurable ROI."
     },
+    quoteHeader: "Emails That Actually Get Read",
+    quoteText: "\"You can have the best offer in the world, but it's worthless if it's sitting in the spam folder. I focused on the technical 'boring' stuff - deliverability and SMTP - because that's where the real money is made.\"",
     galleryMode: "popup-grid",
     images: [
       "/projects/email-marketing/PSM_Emailer.png",
@@ -161,15 +165,15 @@ const projectDetails: Record<string, any> = {
       title: "Elevating Executive Communications",
       content: "I collaborated with a tech leadership network, an exclusive global community for technology leaders and investors, to design premium email banners for their blog content. Recognizing the need to appeal to a high-calibre audience of executives and founders, I focused on creating visually striking designs that aligned with their future-focused brand identity. The new banners successfully elevated the aesthetic appeal of their email communications, resulting in highly positive engagement and direct praise from the community's members."
     },
-    quoteHeader: "Future-Focused Brand Identity",
-    quoteText: "\"The design needed to speak the language of leaders and investors—premium, clear, and impactful without being overly loud. The aesthetic successfully matched their high-calibre audience.\"",
+    quoteHeader: "The Strategy of Subtlety",
+    quoteText: "\"High-net-worth investors aren't impressed by shouting. They want clarity and quiet confidence. I designed these assets to feel like a private club - exclusive, refined, and undeniably professional.\"",
     customShowcase: "xa-network",
     customArchivalNote: "Due to the exclusive nature of this partnership and active confidentiality agreements, the strategic design assets remain strictly confidential and cannot be displayed publicly."
   },
   "bobcat-se": {
-    title: "Construction Machineries Manufacturer",
+    title: "Bobcat.se | Machinery",
     category: "Social Media & Community Management",
-    client: "Construction Machineries Manufacturer",
+    client: "Bobcat.se (Sweden)",
     challenge: "Developing a comprehensive social media strategy to boost community engagement and digital presence.",
     solution: "Implemented an end-to-end community management plan, focusing on consistent, high-quality content delivery and optimized audience interaction.",
     results: [
@@ -181,8 +185,8 @@ const projectDetails: Record<string, any> = {
       title: "Elevating Visual Storytelling",
       content: "During my time at Matrix Media Solutions, I served as a creative catalyst, partnering closely with cross-functional team members to elevate our visual storytelling. By guiding the collaborative development of dynamic designs and engaging video content, I helped translate collective ideas into polished, high-impact assets. Beyond shaping the creative direction, I took full ownership of our digital footprint, strategically managing our Instagram and Facebook profiles to ensure our shared vision consistently resonated with our target audience."
     },
-    quoteHeader: "Building Digital Communities",
-    quoteText: "\"True audience engagement isn't just about posting regularly; it's about intentional community management and building a brand presence that truly resonates.\"",
+    quoteHeader: "Communities, Not Just Followers",
+    quoteText: "\"Real engagement isn't a vanity metric; it's about making people feel like they belong to something. I didn't just 'post' for Bobcat; I managed a digital space where customers felt heard and connected to the brand.\"",
     galleryMode: "centered-image",
     images: [
       "/projects/mockup-2.png"
@@ -201,10 +205,10 @@ const projectDetails: Record<string, any> = {
     ],
     explanation: {
       title: "Content Optimization & Precision",
-      content: "The core of the strategy centered on transforming raw data into high-intent brand interactions. By developing A/B tested subject lines and value-driven copy rooted in sustainability and ESG goals, the outreach bypassed typical spam filters and resonated genuinely with enterprise targets."
+      content: "The core of the strategy centered on transforming raw data into high-intent brand interactions. By developing A/B tested subject lines and value-driven copy rooted in sustainability and ESG goals, the outreach bypassed typical spam filters and resonated genuinely with enterprise targets.\n\nI did lead generation for email marketing and LinkedIn outreach for them using Seamless.ai tools and Apollo.io which helped them with great prospects for cold outreach and drove their ROI 3x than before."
     },
-    quoteHeader: "Strategic Cold Outreach",
-    quoteText: "\"Hitting a 30% open rate in B2B logistics isn't about blind volume—it's about precision targeting, mastering inbox rotation, and deeply understanding the client's core compliance and sustainability services.\"",
+    quoteHeader: "Outreach That Cuts Through The Noise",
+    quoteText: "\"Nobody likes getting cold emails, unless they actually solve a burning problem. I didn't just 'blast' emails; I engineered a system that landed in the primary inbox and spoke directly to the pain points of compliance officers.\"",
     customShowcase: "baytech-recovery"
   },
   "boutique-travel": {
@@ -222,8 +226,8 @@ const projectDetails: Record<string, any> = {
       title: "Content Pillars & Technical Toolkit",
       content: "Four core pillars guided the strategy: 'Bespoke Services' (highlighting private tours), 'Expert Positioning' (sharing hidden gems), 'Community Engagement' (using interactive CTAs), and 'Visual Aesthetics' (curating a premium grid feel). The technical toolkit included Notion, Google Sheets, and Asana for planning; Meta Business Suite, Later, Buffer, and Hootsuite for automation; and meticulous copywriting, caption strategy, and hashtag optimization for creative execution."
     },
-    quoteHeader: "Aspirational Brand Voice",
-    quoteText: "\"Transitioning the brand from static descriptions to benefit-driven storytelling built trust with an international audience. The highly curated aesthetic perfectly captured their bespoke, premium experience.\"",
+    quoteHeader: "Selling the Dream, Not the Hotel",
+    quoteText: "\"Travelers don't buy itineraries; they buy memories. I shifted the focus from 'here's where you'll stay' to 'here's how you'll feel,' using visuals that made people stop scrolling and start planning.\"",
     galleryMode: "centered-image",
     images: [
       "/projects/mockup-1.jpg"
@@ -243,8 +247,8 @@ const projectDetails: Record<string, any> = {
       title: "Strategic Execution & Core Responsibilities",
       content: "AI-Driven Content Creation: Learned and implemented HeyGen and ElevenLabs for voice cloning, producing high-converting short-form video content tailored for Skool. Community Management: Moderated both paid and free groups, fostering a highly active environment. Marketing Automation: Built landing pages and managed email lists via ConvertKit, and implemented Leadshark to automate outbound DM campaigns. Technical Cross-Collaboration: Partnered directly with the development team to conceptualize and design highly personalized lead magnets."
     },
-    quoteHeader: "The Technical Edge",
-    quoteText: "\"Because I have a strong underlying knowledge of AI and automation technology, I wasn't just managing marketing tasks, I was bridging the gap between marketing and development. My technical fluency allowed me to design advanced, viable lead magnets involving complex n8n workflows. This meant the dev team received concepts that were structurally sound and ready to execute, saving time and significantly improving the quality of our lead generation assets.\""
+    quoteHeader: "The Bridge Between Marketing & Dev",
+    quoteText: "\"I'm not just a marketer who uses tools; I'm an operator who understands the plumbing. By knowing how n8n and automation actually work, I could hand the dev team blueprints, not just wishlists. It's about being technically fluent enough to translate strategy into working systems.\"",
   }
 };
 
@@ -408,7 +412,7 @@ const ProjectDetail = () => {
                   <div className="w-8 h-[2px] bg-primary/60" />
                   {project.explanation.title}
                 </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed font-light mt-4 relative z-10 w-full md:w-[90%] lg:w-[80%]">
+                <p className="text-lg text-muted-foreground leading-relaxed font-light mt-4 relative z-10 w-full md:w-[90%] lg:w-[80%] whitespace-pre-wrap">
                   {project.explanation.content}
                 </p>
               </div>

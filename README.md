@@ -1,4 +1,4 @@
-# Rudraksh — Architecting Digital Growth
+# Rudraksh - Architecting Digital Growth
 
 Digital Marketing Specialist and Strategist focused on AI workflow automation, Skool community management, and scaling digital brands through optimized operations.
 

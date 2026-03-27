@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Palette, PenLine, TrendingUp, Megaphone, ArrowRight } from "lucide-react";
 
 const skills = [
-  { icon: Palette, title: "Visual Design", desc: "Brand systems, UI/UX, and visual identities that leave lasting impressions.", stat: "50+ brands" },
-  { icon: PenLine, title: "Content Writing", desc: "SEO-optimized copy, editorial content, and strategies that convert.", stat: "200+ articles" },
-  { icon: TrendingUp, title: "Growth Strategy", desc: "Data-driven marketing plans across organic and paid channels.", stat: "3x avg. ROI" },
-  { icon: Megaphone, title: "Social & Campaigns", desc: "End-to-end campaigns with community building and engagement.", stat: "10M+ reach" },
+  { icon: Palette, title: "Visual Design", desc: "Brand systems, UI/UX, and visual identities that leave lasting impressions." },
+  { icon: PenLine, title: "Content Writing", desc: "SEO-optimized copy, editorial content, and strategies that convert." },
+  { icon: TrendingUp, title: "Growth Strategy", desc: "Data-driven marketing plans across organic and paid channels." },
+  { icon: Megaphone, title: "Social & Campaigns", desc: "End-to-end campaigns with community building and engagement." },
 ];
 
 const AboutSection = () => {
@@ -27,7 +27,7 @@ const AboutSection = () => {
             Where precision meets <span className="italic text-gradient">creative vision</span>
           </h2>
           <p className="text-secondary-foreground max-w-lg leading-relaxed font-light">
-            Years of refining the intersection between design, content, and strategy — 
+            Years of refining the intersection between design, content, and strategy,
             delivering work that's both beautiful and effective.
           </p>
         </motion.div>
@@ -45,7 +45,6 @@ const AboutSection = () => {
               >
                 <div className="flex items-start justify-between mb-6">
                   <skill.icon className="w-5 h-5 text-primary/70 group-hover:text-primary transition-colors" />
-                  <span className="text-xs text-muted-foreground tracking-wider font-medium">{skill.stat}</span>
                 </div>
                 
                 <h3 className="text-lg font-medium mb-2 tracking-tight">{skill.title}</h3>
