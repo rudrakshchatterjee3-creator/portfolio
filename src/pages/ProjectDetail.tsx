@@ -249,6 +249,26 @@ const projectDetails: Record<string, any> = {
     },
     quoteHeader: "The Bridge Between Marketing & Dev",
     quoteText: "\"I'm not just a marketer who uses tools; I'm an operator who understands the plumbing. By knowing how n8n and automation actually work, I could hand the dev team blueprints, not just wishlists. It's about being technically fluent enough to translate strategy into working systems.\"",
+  },
+  "matrix-govt-campaign": {
+    title: "Government of West Bengal - AIDS Awareness",
+    category: "Social Media & Community Management",
+    client: "Matrix Media Solutions | Role: Influencer Outreach & Negotiations Lead",
+    challenge: "The Government of West Bengal needed to amplify a public health campaign on AIDS awareness and safety by partnering with influencers and public figures across multiple tiers.",
+    solution: "On behalf of Matrix Media Solutions, I led all influencer outreach and negotiations, identifying and coordinating with micro-influencers, macro-influencers, and film actors to secure their participation in promoting the campaign.",
+    results: [
+      "Liaised with the Government of West Bengal as an official client for the initiative.",
+      "Negotiated influencer partnerships across micro, macro, and celebrity tiers.",
+      "Managed all client communications and influencer coordination on behalf of Matrix Media Solutions."
+    ],
+    explanation: {
+      title: "Influencer Strategy for a Government Campaign",
+      content: "I represented Matrix Media Solutions in all communications with influencers and public figures for this government-backed initiative. I managed the outreach pipeline end-to-end, from vetting influencer profiles and drafting proposals to negotiating deliverables. The strategy combined the broad reach of macro-influencers and film actors with the authentic, community-level trust of micro-influencers to maximize awareness across West Bengal."
+    },
+    quoteHeader: "Where Strategy Meets Public Impact",
+    quoteText: "\"Working with a state government client is a different caliber of responsibility. Every negotiation has to be precise, and the goal is not just engagement metrics - it is genuine public awareness that can save lives.\"",
+    customShowcase: "matrix-govt-campaign",
+    customArchivalNote: "Due to the official nature of this government engagement, detailed campaign assets and influencer contracts cannot be displayed publicly."
   }
 };
 
@@ -263,7 +283,7 @@ const ProjectDetail = () => {
   const categoryMap: Record<string, string[]> = {
     "social-media-designs": ["social-media-designs", "matrix-media-solutions"],
     "email-marketing": ["psm-cabinets", "xa-network", "baytech-recovery"],
-    "social-media-management": ["vertical-systems", "bobcat-se", "boutique-travel"],
+    "social-media-management": ["vertical-systems", "bobcat-se", "boutique-travel", "matrix-govt-campaign"],
     "live-bold-campaign": ["live-bold-campaign"]
   };
   

@@ -8,19 +8,19 @@ const projects = [
     id: "social-media-designs",
     title: "Social Media Designs",
     category: "Design",
-    description: "A curated collection of cross-platform visual strategies. Explore how I translate distinct brand identities into engaging, high-performing design systems across various industries.",
+    description: "Cross-platform visual strategies that translate brand identities into high-performing design systems.",
   },
   {
     id: "email-marketing",
     title: "Email Marketing",
     category: "Email Marketing",
-    description: "Strategic campaigns designed for scale and conversion. This selection highlights my expertise in resolving complex deliverability challenges to drive rapid, cost-effective acquisition for diverse portfolios.",
+    description: "Campaigns built for scale, conversion, and deliverability - driving cost-effective acquisition across diverse portfolios.",
   },
   {
     id: "social-media-management",
     title: "Social Media & Community Management",
     category: "Social Media & Community Management",
-    description: "End-to-end community building and digital optimization. Discover how I foster organic engagement, manage brand reputation, and architect sustainable growth across multiple online communities.",
+    description: "Organic engagement, brand reputation management, and sustainable growth across multiple online communities.",
   },
 ];
 
