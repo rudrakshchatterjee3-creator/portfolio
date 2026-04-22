@@ -4,7 +4,6 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import InteractiveBackground from "@/components/InteractiveBackground";
 
 // Detailed data for projects on their own pages
 const projectDetails: Record<string, any> = {
@@ -305,12 +304,12 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative z-0">
-      <InteractiveBackground />
+    <div className="min-h-screen flex flex-col relative z-0 noise-overlay">
+      <div className="radial-bg" />
       <Navbar />
 
       <main className="flex-1 pt-44 pb-24 px-6 md:px-16 lg:px-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           {/* Back Button */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="mb-20">
             <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors group">
@@ -320,7 +319,7 @@ const ProjectDetail = () => {
           </motion.div>
 
           {projects.map((project, projectIndex) => (
-            <div key={projectIndex} className={projectIndex > 0 ? "mt-48 pt-32 relative" : "relative"}>
+            <div key={projectIndex} className={projectIndex > 0 ? "mt-12 pt-8 relative" : "relative"}>
               
               {/* Divider for consecutive projects */}
               {projectIndex > 0 && (
@@ -339,79 +338,81 @@ const ProjectDetail = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="mb-16 relative z-10"
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-12 relative z-10"
               >
                 <div className="flex flex-col mb-12">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-muted-foreground/50 text-sm font-bold tracking-widest">
+                  <div className="flex items-center gap-6 mb-12 accelerate">
+                    <span className="mono-label text-primary font-bold italic">
                       {(projectIndex + 1).toString().padStart(2, '0')}
                     </span>
-                    <div className="w-12 h-px bg-border" />
-                    <p className="text-primary text-xs tracking-[0.4em] uppercase font-medium">
+                    <div className="w-16 h-px bg-white/10" />
+                    <p className="mono-label text-white/40">
                       {project.category}
                     </p>
                   </div>
                   
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight mb-8">
-                    {project.title}
+                  <h1 className="text-huge font-black uppercase tracking-tighter text-white mb-16 accelerate flex flex-wrap items-center gap-x-6">
+                    {project.title.match(/[|\-]/) ? (
+                      <>
+                        <span>{project.title.split(/[|\-]/)[0].trim()}</span>
+                        <span className="h-[0.9em] w-2 md:w-3 bg-primary inline-block mx-2" />
+                        <span className="text-white/50 font-medium">{project.title.split(/[|\-]/)[1].trim()}</span>
+                      </>
+                    ) : project.title}
                   </h1>
                   
-                  <div className="inline-flex flex-wrap items-center gap-2 md:gap-4 px-4 py-2 sm:px-5 sm:py-3 rounded-full border border-primary/20 bg-secondary/10 self-start backdrop-blur-sm">
-                    <span className="text-[10px] sm:text-xs tracking-widest uppercase font-bold text-primary/70">Client Profile</span>
-                    <div className="w-1 h-1 rounded-full bg-primary/40 hidden md:block" />
-                    <p className="text-xs sm:text-sm md:text-base text-card-foreground font-medium">
+                  <div className="inline-flex items-center gap-6 px-8 py-4 bg-zinc-900 border border-white/5 self-start accelerate">
+                    <span className="mono-label text-primary font-bold italic">Client</span>
+                    <p className="text-xl text-white font-light italic">
                       {project.client}
                     </p>
                   </div>
                 </div>
-            {/* Consolidated Content Details */}
-            <div className="grid md:grid-cols-3 gap-10 md:gap-8 pt-8 border-t border-border/40">
-              <div className="md:col-span-2 space-y-10 md:space-y-12">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
-                    <div className="w-8 h-px bg-primary/40" />
-                    The Challenge
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed font-light text-base sm:text-lg">
-                    {project.challenge}
-                  </p>
-                </div>
 
-                <div>
-                  <h3 className="text-lg sm:text-xl font-medium mb-4 text-foreground/90 flex items-center gap-3">
-                    <div className="w-8 h-px bg-primary/40" />
-                    The Solution
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed font-light text-base sm:text-lg">
-                    {project.solution}
-                  </p>
-                </div>
-              </div>
+                {/* Consolidated Content Details */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 pt-24 border-t border-white/5">
+                  <div className="lg:col-span-8 space-y-24">
+                    <div>
+                      <h3 className="mono-label text-primary mb-8 font-bold italic">The Challenge</h3>
+                      <p className="text-3xl font-light text-muted-foreground leading-relaxed italic">
+                        {project.challenge}
+                      </p>
+                    </div>
 
-              <div className="glass-card p-6 sm:p-8 self-start">
-                <h3 className="text-sm font-bold mb-6 uppercase tracking-[0.2em] text-primary">Impact & Results</h3>
-                <ul className="space-y-4">
-                  {project.results.map((result: string, i: number) => (
-                    <li key={i} className="flex items-start gap-4 group">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0 glow-shadow group-hover:scale-150 transition-transform" />
-                      <span className="text-muted-foreground font-light text-sm leading-relaxed">{result}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
+                    <div>
+                      <h3 className="mono-label text-primary mb-8 font-bold italic">The Solution</h3>
+                      <p className="text-2xl font-light text-white/80 leading-relaxed italic">
+                        {project.solution}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-4">
+                    <div className="bg-zinc-950 p-12 border border-white/5 accelerate">
+                      <h3 className="mono-label text-primary mb-12 font-bold italic text-center">Impact & Results</h3>
+                      <ul className="space-y-8">
+                        {project.results.map((result: string, i: number) => (
+                          <li key={i} className="flex items-start gap-6 group">
+                            <span className="mono-label text-primary/40 font-bold">0{i + 1}</span>
+                            <span className="text-lg text-muted-foreground font-light leading-relaxed group-hover:text-white transition-colors">{result}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
           {/* McGill Marketing Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-24 max-w-3xl mx-auto px-4"
+            className="text-center mb-8 max-w-3xl mx-auto px-4"
           >
             <div className="w-24 h-px bg-primary/20 mx-auto mb-10 sm:mb-12" />
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight mb-6 italic">{project.quoteHeader || "High-Impact Carousels That Demand a Verdict"}</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6">{project.quoteHeader || "High-Impact Carousels That Demand a Verdict"}</h2>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed italic">
               {project.quoteText || "\"You don't just need a design. You need a statement. A billboard for your brilliance. I deliver work that works as hard as you do, maybe even harder. Precision meets persuasion in every slide.\""}
             </p>
@@ -423,7 +424,7 @@ const ProjectDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-20 mb-32 max-w-5xl mx-auto relative group"
+              className="mt-4 mb-8 max-w-5xl mx-auto relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-50 rounded-[2rem] blur-xl -z-10 transition-opacity duration-700 group-hover:opacity-100" />
               <div className="glass-card p-10 md:p-14 rounded-[2rem] border-primary/20 hover:border-primary/40 transition-colors duration-500 relative overflow-hidden">
@@ -439,69 +440,42 @@ const ProjectDetail = () => {
             </motion.div>
           )}
 
-          {/* Custom Popup Gallery */}
+          {/* Custom Popup Gallery - Masonry Layout for Vertical Content */}
           {project.galleryMode === "popup-grid" && project.images && (
-            <div className="mb-32 space-y-12">
+            <div className="mb-48">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-12 sm:mb-16 px-4"
+                className="text-center mb-32 px-4"
               >
-                <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-4 text-foreground/90">Campaign Creatives</h3>
-                <p className="text-muted-foreground font-light text-base sm:text-lg">
-                  Designed in collaboration with expert email designers. Click to enlarge.
+                <h3 className="text-5xl font-black uppercase tracking-tighter text-white mb-8">Campaign Creatives</h3>
+                <p className="text-xl text-muted-foreground font-light italic">
+                  Designed in collaboration with expert email designers.
                 </p>
-                <div className="w-24 h-px bg-primary/20 mx-auto mt-6 sm:mt-8" />
+                <div className="w-24 h-px bg-primary/40 mx-auto mt-12" />
               </motion.div>
               
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+              <div className="columns-1 lg:columns-2 gap-12 space-y-12">
                 {project.images.map((src: string, i: number) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                    className="break-inside-avoid relative group cursor-pointer fast-card p-2 hover:border-primary/50 transition-colors duration-500"
+                    transition={{ duration: 1, delay: (i % 2) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="break-inside-avoid exhibit-card cursor-pointer group"
                     onClick={() => setSelectedImage(src)}
                   >
-                    <div className="relative z-10 w-full overflow-hidden rounded-[10px] bg-secondary/10 flex items-center justify-center min-h-[200px]">
-                      {/* Loading Indicator */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-secondary/20 animate-pulse data-[loaded=true]:hidden" id={`loader-${i}`}>
-                        <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-                      </div>
-                      
+                    <div className="relative z-10 w-full overflow-hidden rounded-xl">
                       <img
                         src={src}
-                        alt={`Campaign creative ${i + 1}`}
-                        className="w-full h-auto object-contain opacity-0 data-[loaded=true]:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.03] shadow-md"
+                        alt={`Creative exhibit ${i + 1}`}
+                        className="w-full h-auto object-cover transition-all duration-1000 ease-out group-hover:scale-[1.05]"
                         loading="lazy"
-                        onLoad={(e) => {
-                          e.currentTarget.setAttribute('data-loaded', 'true');
-                          const loader = document.getElementById(`loader-${i}`);
-                          if (loader) loader.setAttribute('data-loaded', 'true');
-                        }}
-                        ref={(img) => {
-                          if (img && img.complete) {
-                            img.setAttribute('data-loaded', 'true');
-                            const loader = document.getElementById(`loader-${i}`);
-                            if (loader) loader.setAttribute('data-loaded', 'true');
-                          }
-                        }}
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          const loader = document.getElementById(`loader-${i}`);
-                          if (loader) {
-                            loader.innerHTML = '<p class="text-[10px] uppercase tracking-widest text-muted-foreground">Asset Error</p>';
-                            loader.classList.remove('animate-pulse');
-                          }
-                        }}
+                        onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
-                    </div>
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none rounded-[10px] z-20">
-                      <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary translate-y-4 group-hover:translate-y-0 transition-transform duration-500">View Full Design</p>
                     </div>
                   </motion.div>
                 ))}
@@ -509,38 +483,84 @@ const ProjectDetail = () => {
             </div>
           )}
 
+          {/* Custom Showcase Sections (Restored) */}
+          {project.customShowcase === "xa-network" && (
+            <div className="py-4 text-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="exhibit-card max-w-4xl mx-auto py-32 px-12"
+              >
+                <p className="mono-label text-primary mb-8 font-bold italic">Confidential Archive</p>
+                <h3 className="text-4xl font-black uppercase tracking-tighter text-white mb-12">Executive Strategy Assets</h3>
+                <p className="text-xl text-muted-foreground font-light italic leading-relaxed">
+                  {project.customArchivalNote}
+                </p>
+              </motion.div>
+            </div>
+          )}
+
+          {project.customShowcase === "baytech-recovery" && (
+            <div className="py-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="exhibit-card max-w-5xl mx-auto p-16"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                  <div>
+                    <h3 className="text-3xl font-black uppercase tracking-tighter text-white mb-8">Lead Gen Architecture</h3>
+                    <p className="text-lg text-muted-foreground font-light italic leading-relaxed">
+                      Detailed outbound sequences, technographic audience building, and inbox rotation strategies are kept under strict NDA to protect client competitive advantage.
+                    </p>
+                  </div>
+                  <div className="p-8 bg-black/40 rounded-xl border border-white/5 text-center">
+                    <p className="mono-label text-primary/40">Data Strategy Restricted</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+
+          {project.customShowcase === "matrix-govt-campaign" && (
+            <div className="py-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="exhibit-card max-w-4xl mx-auto py-24 text-center"
+              >
+                <p className="mono-label text-primary mb-8 italic">Government Engagement</p>
+                <h3 className="text-3xl font-black uppercase tracking-tighter text-white mb-8">Campaign Outreach Log</h3>
+                <p className="text-lg text-muted-foreground font-light italic">
+                  {project.customArchivalNote}
+                </p>
+              </motion.div>
+            </div>
+          )}
+
           {/* Centered Image (Mini Case Study) */}
           {project.galleryMode === "centered-image" && project.images && (
-            <div className="mb-32 w-full flex justify-center">
-              <div className="w-full max-w-3xl px-4">
+            <div className="mb-24 w-full flex justify-center">
+              <div className="w-full max-w-4xl px-4">
                 {project.images.map((src: string, i: number) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="relative group cursor-pointer fast-card p-2 hover:border-primary/50 transition-colors duration-500 w-full"
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="exhibit-card cursor-pointer w-full"
                     onClick={() => setSelectedImage(src)}
                   >
-                    <div className="relative z-10 w-full aspect-[16/11] overflow-hidden rounded-[10px] bg-secondary/5 flex items-center justify-center">
+                    <div className="relative z-10 w-full aspect-[16/10] overflow-hidden rounded-xl">
                       <img
                         src={src}
                         alt={`Case study creative ${i + 1}`}
-                        className="w-full h-full object-cover object-[center_75%] opacity-0 data-[loaded=true]:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.03] shadow-md"
+                        className="w-full h-full object-cover object-[center_75%] transition-all duration-700 ease-out group-hover:scale-[1.03]"
                         loading="lazy"
                         onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
-                        ref={(img) => {
-                          if (img && img.complete) img.setAttribute('data-loaded', 'true');
-                        }}
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
-                    </div>
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none rounded-[10px] z-20">
-                      <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary translate-y-4 group-hover:translate-y-0 transition-transform duration-500">View Full Design</p>
                     </div>
                   </motion.div>
                 ))}
@@ -548,128 +568,96 @@ const ProjectDetail = () => {
             </div>
           )}
 
-          {/* Multiple Project Galleries - Centered Marquee Stack */}
+          {/* Multiple Project Galleries - Premium Horizontal Scroll */}
           {project.galleries && (
-          <div className="space-y-32">
-            {project.galleries.map((gallery: any, galleryIdx: number) => {
-              const isEven = galleryIdx % 2 === 0;
-
-              return (
+            <div className="space-y-48">
+              {project.galleries.map((gallery: any, galleryIdx: number) => (
                 <motion.div
                   key={galleryIdx}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8 }}
-                  className="w-full"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5 }}
+                  className="w-full relative"
                 >
                   {gallery.title && (
-                    <div className="mb-6 sm:mb-8 px-4 md:px-12 text-center md:text-left">
-                      <h3 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground/90">{gallery.title}</h3>
-                      {gallery.description && <p className="text-sm sm:text-base text-muted-foreground mt-2 font-light">{gallery.description}</p>}
+                    <div className="mb-12 px-4 text-center">
+                      <p className="mono-label text-primary mb-4 italic">Exhibit {galleryIdx + 1}</p>
+                      <h3 className="text-4xl font-black uppercase tracking-tighter text-white">{gallery.title}</h3>
+                      {gallery.description && <p className="text-xl text-muted-foreground mt-4 font-light italic">{gallery.description}</p>}
                     </div>
                   )}
-                  <div className="relative group">
-                    {/* Centered Marquee Container */}
-                    <div className="relative mesh-glow p-4 sm:p-8 md:p-12 rounded-[1.5rem] sm:rounded-[3rem] overflow-hidden">
-                      <div className="marquee-container group cursor-crosshair">
-                        {[1, 2, 3, 4].map((set) => {
-                          // Calculate duration based on image count to keep speed (pixels/sec) constant
-                          // Base case: 12 images moves in 40s
-                          const duration = Math.max((gallery.images.length / 12) * 40, 10);
 
-                          return (
-                            <div
-                              key={set}
-                              className="marquee-content py-4 gap-12"
-                              style={{ animationDuration: `${duration}s` }}
+                  <div className="relative overflow-hidden py-12">
+                    <div className="marquee-container accelerate">
+                      {[1, 2].map((set) => (
+                        <div
+                          key={set}
+                          className="marquee-content"
+                          style={{ '--duration': `${Math.max(gallery.images.length * 4, 20)}s` } as React.CSSProperties}
+                        >
+                          {gallery.images.map((src: string, index: number) => (
+                            <motion.div
+                              key={`${set}-${index}`}
+                              whileHover={{ scale: 1.02 }}
+                              className="exhibit-card h-[720px] shrink-0 relative group cursor-pointer"
+                              onClick={() => setSelectedImage(src)}
                             >
-                              {gallery.images.map((src: string, index: number) => (
-                                <div
-                                  key={`${set}-${index}`}
-                                  className="h-[240px] sm:h-[320px] md:h-[400px] shrink-0 fast-card p-2 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                                  style={{ willChange: 'transform' }}
-                                >
-                                  <img
-                                    src={src}
-                                    alt={`Gallery image ${index + 1}`}
-                                    className="h-full w-auto object-contain rounded shadow-lg opacity-0 data-[loaded=true]:opacity-100 transition-opacity duration-700"
-                                    loading={set === 1 ? "eager" : "lazy"}
-                                    decoding="async"
-                                    onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
-                                    ref={(img) => {
-                                      if (img && img.complete) img.setAttribute('data-loaded', 'true');
-                                    }}
-                                    onError={(e) => {
-                                      e.currentTarget.style.display = 'none';
-                                      e.currentTarget.parentElement!.classList.add('bg-secondary/20', 'w-[300px]', 'flex', 'items-center', 'justify-center');
-                                      e.currentTarget.parentElement!.innerHTML += `<div class="text-muted-foreground p-8 text-center"><p class="text-[9px] font-bold tracking-widest uppercase mb-1">Asset Error</p></div>`;
-                                    }}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          );
-                        })}
-                      </div>
+                              <img
+                                src={src}
+                                alt={`Gallery image ${index + 1}`}
+                                className="h-full w-auto object-contain transition-all duration-700"
+                                loading="lazy"
+                                onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                              />
+                            </motion.div>
+                          ))}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </motion.div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
           )}
 
-          {/* Single Images Grid - "Flowing" Organization */}
+          {/* Single Images Grid - Editorial Staggered Layout */}
           {project.singleImages && (
-            <div className="mt-40">
+            <div className="mt-40 mb-32">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="text-center mb-24"
               >
-                <div className="w-24 h-px bg-primary/20 mx-auto mb-10 sm:mb-12" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight mb-6 italic">The Individual Exhibits</h2>
-                <p className="text-base sm:text-lg md:text-xl text-muted-foreground font-light italic px-4">
+                <div className="w-24 h-px bg-primary/40 mx-auto mb-10" />
+                <h2 className="text-6xl font-black uppercase tracking-tighter text-white mb-6">The Individual Exhibits</h2>
+                <p className="text-xl text-muted-foreground font-light italic px-4">
                   "Stand-alone brilliance. Each frame curated to command the full attention of the jury."
                 </p>
               </motion.div>
 
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
                 {project.singleImages.map((src: string, i: number) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: "0px" }}
-                    transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-                    className="break-inside-avoid"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: (i % 2) * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className={`relative group cursor-pointer exhibit-card accelerate ${i % 2 !== 0 ? 'md:mt-16' : ''}`}
+                    onClick={() => setSelectedImage(src)}
                   >
-                    <div className="fast-card p-2 group overflow-hidden relative transition-all duration-700 hover:border-primary/50">
-                      <div className="relative z-10 w-full overflow-hidden rounded-[10px] bg-secondary/5 flex items-center justify-center">
-                        <img
-                          src={src}
-                          alt={`Individual exhibit ${i + 1}`}
-                          className="w-full h-auto object-cover opacity-0 data-[loaded=true]:opacity-100 transition-all duration-1000 ease-out group-hover:scale-[1.03] shadow-md"
-                          loading="lazy"
-                          decoding="async"
-                          onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
-                          ref={(img) => {
-                            if (img && img.complete) img.setAttribute('data-loaded', 'true');
-                          }}
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                            e.currentTarget.parentElement!.classList.add('flex', 'items-center', 'justify-center', 'p-12');
-                            e.currentTarget.parentElement!.innerHTML = `<div class="text-center"><p class="text-[10px] font-bold tracking-[0.3em] uppercase text-primary/40 mb-2">Exhibit ${i + 1}</p><p class="text-[8px] italic text-muted-foreground">Digital Asset Restricted</p></div>`;
-                          }}
-                        />
-                      </div>
-
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
-                        <p className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary translate-y-4 group-hover:translate-y-0 transition-transform duration-500">View Full Case</p>
-                      </div>
+                    <div className="relative z-10 w-full overflow-hidden rounded-xl">
+                      <img
+                        src={src}
+                        alt={`Individual exhibit ${i + 1}`}
+                        className="w-full h-auto object-cover transition-all duration-1000 ease-out group-hover:scale-[1.02]"
+                        loading="lazy"
+                        onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
                     </div>
                   </motion.div>
                 ))}

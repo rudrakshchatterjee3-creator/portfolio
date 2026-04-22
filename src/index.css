@@ -1,233 +1,173 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
-    --background: 30 20% 98%;
-    --foreground: 30 15% 15%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 30 15% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 30 15% 15%;
-
-    --primary: 33 40% 30%;
-    --primary-foreground: 30 20% 98%;
-
-    --secondary: 30 10% 90%;
-    --secondary-foreground: 30 15% 30%;
-
-    --muted: 30 10% 92%;
-    --muted-foreground: 30 10% 45%;
-
-    --accent: 33 40% 90%;
-    --accent-foreground: 30 15% 20%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 30 10% 85%;
-    --input: 30 10% 85%;
-    --ring: 33 40% 30%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 30 15% 7%;
-    --foreground: 35 30% 88%;
-
-    --card: 30 10% 11%;
-    --card-foreground: 35 30% 88%;
-
-    --popover: 30 10% 11%;
-    --popover-foreground: 35 30% 88%;
-
-    --primary: 33 40% 70%;
-    --primary-foreground: 30 15% 7%;
-
-    --secondary: 30 8% 15%;
-    --secondary-foreground: 35 20% 65%;
-
-    --muted: 30 6% 18%;
-    --muted-foreground: 30 12% 45%;
-
-    --accent: 33 40% 70%;
-    --accent-foreground: 30 15% 7%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 30 8% 16%;
-    --input: 30 8% 16%;
-    --ring: 33 40% 70%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 90%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 90%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 84% 60%; /* #ef4444 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 0 84% 60%;
+    --radius: 0rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border selection:bg-primary selection:text-white;
   }
-
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
-    font-family: 'Inter', sans-serif;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'ZTNature', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
-
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
+/* Noise Overlay - Performance Optimized (Tiled SVG) */
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  animation: noise 0.5s steps(5) infinite;
+  will-change: transform;
+}
+
+@keyframes noise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 10%); }
+  70% { transform: translate(10%, 5%); }
+  80% { transform: translate(-15%, 5%); }
+  90% { transform: translate(5%, 10%); }
+  100% { transform: translate(5%, 5%); }
+}
+
+/* Radial Background - GPU Optimized */
+.radial-bg {
+  background: radial-gradient(circle at 50% 30%, rgba(239, 68, 68, 0.1) 0%, rgba(10, 10, 10, 0) 80%, transparent 100%);
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  transform: translateZ(0);
+}
+
 @layer utilities {
-  .gradient-dark {
-    @apply bg-background;
-  }
-  .gradient-card {
-    background: linear-gradient(145deg, hsl(var(--card)), hsl(var(--secondary)/0.5));
-  }
-  .gradient-accent {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)/0.8));
-  }
-  .glow-shadow {
-    box-shadow: 0 8px 32px -8px hsl(var(--primary) / 0.12);
-  }
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(33 45% 65%), hsl(28 35% 48%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .dark .text-gradient {
-    background: linear-gradient(135deg, hsl(33 45% 75%), hsl(28 35% 58%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .line-accent {
-    width: 40px;
-    height: 1px;
-    background: hsl(var(--primary) / 0.5);
-  }
-
-  /* Apple-style Liquid Glass UI - Enhanced */
-  .liquid-glass {
-    @apply bg-white/45 dark:bg-black/45 backdrop-blur-[40px] border border-white/25 dark:border-white/10 shadow-2xl;
-    position: relative;
-    overflow: hidden;
-    /* Hardware acceleration */
+  .accelerate {
     transform: translateZ(0);
-    will-change: backdrop-filter;
-    /* Inner glow/shadow for liquid depth */
-    box-shadow: 
-      inset 0 0 20px rgba(255, 255, 255, 0.05),
-      0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden;
+    perspective: 1000;
+    will-change: transform, opacity, filter;
   }
 
-  .liquid-glass::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-    z-index: 1;
-    opacity: 0.8;
-  }
-
-  .glass-card {
-    @apply liquid-glass rounded-2xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] hover:bg-white/55 dark:hover:bg-black/55 hover:-translate-y-1;
-  }
-
-  /* GPU-Accelerated premium card for high-volume sections (like Marquees) without expensive backdrop-blurs */
-  .fast-card {
-    @apply bg-white/5 dark:bg-white/5 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:bg-white/10 dark:hover:bg-white/10 hover:border-white/20;
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
+  .text-huge {
+    font-size: 8vw;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    @apply accelerate;
   }
   
-  .fast-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    z-index: 1;
-    opacity: 0.8;
+  .font-black {
+    font-weight: 900;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .font-light {
+    font-weight: 300;
   }
 
-  /* Catchy Mesh Glow for backgrounds */
-  .mesh-glow {
-    position: relative;
-    overflow: hidden;
+  .mono-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    @apply accelerate;
   }
 
-  .mesh-glow::after {
-    content: '';
-    position: absolute;
-    inset: -20%;
-    background: radial-gradient(circle at 70% 30%, hsla(var(--primary)/0.15), transparent 60%),
-                radial-gradient(circle at 30% 70%, hsla(var(--accent)/0.1), transparent 60%);
-    filter: blur(80px);
-    z-index: -1;
-    pointer-events: none;
-    animation: mesh-float 20s infinite alternate ease-in-out;
+  .glassmorphism {
+    @apply backdrop-blur-[12px] bg-black/40 border border-white/5 accelerate;
   }
+}
 
-  @keyframes mesh-float {
-    0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.1) translate(20px, -20px); }
-  }
+/* Custom Easing */
+.ease-lens {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  /* Infinite Marquee */
-  .marquee-container {
-    @apply flex overflow-hidden select-none gap-8;
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateZ(0); }
+  50% { transform: translateY(-10px) translateZ(0); }
+}
 
-  .marquee-content {
-    @apply flex shrink-0 items-center justify-start gap-12 min-w-full;
-    animation: scroll 40s linear infinite;
-    transform: translateZ(0);
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
     will-change: transform;
   }
 
-  .marquee-content.reverse {
-    animation-direction: reverse;
+  /* Marquee Implementation - Fixed Wrapping */
+  .marquee-container {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    width: 100%;
+  }
+
+  .marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent images from going below each other */
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 100%;
+    gap: 3rem;
+    padding: 2rem 0;
+    animation: marquee-scroll var(--duration, 40s) linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
   }
 
   .marquee-container:hover .marquee-content {
     animation-play-state: paused;
   }
 
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 3rem)); } /* 3rem accounts for gap-12 */
+  /* Exhibit Card Style - Subtle Surface */
+  .exhibit-card {
+    @apply bg-white/[0.02] p-6 md:p-12 border border-white/5 rounded-xl hover:border-primary transition-all duration-700 accelerate;
+    backdrop-filter: blur(8px);
   }
-
-  /* Background glow drift animations */
-  @keyframes glowDrift1 {
-    0% { transform: translate3d(0, 0, 0); }
-    25% { transform: translate3d(30px, -30px, 0); }
-    50% { transform: translate3d(-10px, -50px, 0); }
-    75% { transform: translate3d(-30px, 30px, 0); }
-    100% { transform: translate3d(0, 0, 0); }
-  }
-
-  @keyframes glowDrift2 {
-    0% { transform: translate3d(0, 0, 0); }
-    25% { transform: translate3d(-50px, 50px, 0); }
-    50% { transform: translate3d(30px, 20px, 0); }
-    75% { transform: translate3d(50px, -50px, 0); }
-    100% { transform: translate3d(0, 0, 0); }
-  }
-}

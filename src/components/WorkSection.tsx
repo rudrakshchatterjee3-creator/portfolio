@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Briefcase } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const projects = [
   {
@@ -25,64 +25,71 @@ const projects = [
 ];
 
 const WorkSection = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.27]);
+
   return (
-    <section id="work" className="py-28 px-6 md:px-16 lg:px-24">
-      <div className="max-w-5xl mx-auto">
+    <section ref={containerRef} id="work" className="py-48 px-6 md:px-16 lg:px-24 bg-transparent overflow-hidden relative">
+      <div className="max-w-[1400px] mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-32"
         >
-          <div className="line-accent mb-6" />
-          <p className="text-primary text-xs tracking-[0.4em] uppercase mb-4 font-medium">Portfolio</p>
-          <h2 className="text-3xl md:text-4xl font-medium tracking-tight">Selected work</h2>
+          <p className="mono-label text-primary mb-8 font-bold italic">Portfolio</p>
+          <h2 className="text-[10vw] font-black uppercase leading-none tracking-tighter text-white">
+            Selected <br />
+            <span className="text-primary italic font-medium">work</span>
+          </h2>
         </motion.div>
 
-        <div className="flex flex-col gap-6">
-          {projects.map((project, i) => {
-            const isSocialMedia = project.id === "social-media-designs";
-            const isEmailMarketing = project.id === "email-marketing";
-            const isSmm = project.id === "social-media-management";
-
-            return (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative"
+        <div className="flex flex-col gap-px bg-white/5 accelerate">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative overflow-hidden group accelerate"
+            >
+              <Link
+                to={`/category/${project.id}`}
+                className="block p-12 md:p-20 bg-transparent hover:bg-white/[0.02] transition-colors duration-700 relative z-10 accelerate"
               >
-                <Link
-                  to={`/category/${project.id}`}
-                  className="glass-card block p-5 md:p-8 group relative overflow-hidden"
-                >
-                  <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 relative z-10">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 sm:gap-4 mb-3">
-                        <span className="text-[9px] sm:text-[10px] text-primary/60 tracking-[0.3em] uppercase font-bold">{project.category}</span>
-                        {(isSocialMedia || isEmailMarketing || isSmm) && (
-                          <span className="text-[9px] sm:text-[10px] text-primary tracking-[0.2em] font-medium ml-2">MULTIPLE CLIENTS</span>
-                        )}
-                      </div>
-                      <h3 className="text-xl sm:text-2xl font-medium tracking-tight mb-2 sm:mb-3 transition-all duration-300 group-hover:translate-x-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted-foreground text-xs sm:text-sm max-w-lg font-light leading-relaxed">
-                        {project.description}
-                      </p>
+                <div className="flex flex-col md:flex-row items-start justify-between gap-12 relative z-10 accelerate">
+                  <div className="flex-1 accelerate">
+                    <div className="flex items-center gap-6 mb-8 accelerate">
+                      <span className="mono-label text-primary font-bold">0{i + 1}</span>
+                      <span className="mono-label text-white/40">{project.category}</span>
                     </div>
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-500 self-end sm:self-start">
-                      <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground group-hover:text-primary-foreground transition-all" />
-                    </div>
+                    <h3 className="text-huge font-black uppercase tracking-tighter mb-8 text-white group-hover:text-primary transition-colors duration-500 leading-none accelerate">
+                      {project.title}
+                    </h3>
+                    <p className="text-2xl text-muted-foreground font-light max-w-2xl leading-relaxed italic accelerate">
+                      {project.description}
+                    </p>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                </Link>
-              </motion.div>
-            );
-          })}
+                  <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-700 accelerate">
+                    <ArrowUpRight className="w-8 h-8 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 accelerate" />
+                  </div>
+                </div>
+
+                {/* Lens Focal Shift Background Scale Effect */}
+                <motion.div 
+                  style={{ scale: bgScale }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.2)_0%,transparent_70%)] transition-opacity duration-1000 pointer-events-none accelerate"
+                />
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -4,17 +4,18 @@ import AboutSection from "@/components/AboutSection";
 import WorkSection from "@/components/WorkSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import InteractiveBackground from "@/components/InteractiveBackground";
 
 const Index = () => {
   return (
-    <div className="relative z-10 min-h-screen">
-      <InteractiveBackground />
+    <div className="relative z-10 min-h-screen noise-overlay">
+      <div className="radial-bg" />
       <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <WorkSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <WorkSection />
+        <ContactSection />
+      </main>
       <Footer />
     </div>
   );
