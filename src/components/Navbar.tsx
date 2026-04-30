@@ -29,7 +29,7 @@ const Navbar = () => {
             href="mailto:rudraksh.chatterjee3@gmail.com"
             className="bg-white text-black px-8 py-3 font-black text-sm uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-500 accelerate"
           >
-            Talk to us
+            Let's Talk
           </a>
         </div>
 
@@ -58,7 +58,7 @@ const Navbar = () => {
             href="mailto:rudraksh.chatterjee3@gmail.com"
             className="block bg-primary text-white text-center py-6 font-black text-xl uppercase tracking-widest"
           >
-            Talk to us
+            Let's Talk
           </a>
         </div>
       )}
