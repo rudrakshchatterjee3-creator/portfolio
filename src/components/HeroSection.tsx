@@ -36,9 +36,9 @@ const HeroSection = () => {
         >
           Crafting digital
           <br />
-          <span className="text-primary italic font-medium">narratives</span> that
+          <span className="text-primary italic font-medium">footprints</span> to
           <br />
-          elevate brands.
+          scale brands.
         </motion.h1>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-24">
